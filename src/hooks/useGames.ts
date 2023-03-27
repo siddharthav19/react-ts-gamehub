@@ -24,26 +24,31 @@ export interface rawgGamesResponse {
 
 
 function useGames() {
+  const [isLoading,setLoading] = useState<boolean>(false);
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
+    setLoading(true);
     apiClient
       .get<rawgGamesResponse>("/games",{
         signal:controller.signal
       })
-      .then(({ data: { results } }) => setGames(results))
+      .then(({ data: { results } }) => {
+        setGames(results);
+        setLoading(false);
+      })
       .catch((err) => {
         if (err instanceof CanceledError)
         return ;
         setError(err.message);
+        setLoading(false);
       });
-
       return ()=>controller.abort();
   },[]);
 
-  return {games,error};
+  return {games,error,isLoading};
 }
 
 export default useGames;
