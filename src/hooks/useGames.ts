@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient,{CanceledError} from "../services/api-client";
+import useData from "./useData";
 
 
 export interface Platform{
@@ -16,39 +17,6 @@ export interface Game {
   metacritic:number;
 }
 
-export interface rawgGamesResponse {
-  count: number;
-  results: Game[];
-}
-
-
-
-function useGames() {
-  const [isLoading,setLoading] = useState<boolean>(false);
-  const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const controller = new AbortController();
-    setLoading(true);
-    apiClient
-      .get<rawgGamesResponse>("/games",{
-        signal:controller.signal
-      })
-      .then(({ data: { results } }) => {
-        setGames(results);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError)
-        return ;
-        setError(err.message);
-        setLoading(false);
-      });
-      return ()=>controller.abort();
-  },[]);
-
-  return {games,error,isLoading};
-}
+const useGames = () => useData<Game>('/games');
 
 export default useGames;
