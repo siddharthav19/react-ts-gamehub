@@ -40,7 +40,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
               onClick={() => onSelectGenre(e)}
               fontSize="lg"
             >
-              {e.name}
+              {e.name.length < 16 ? e.name : e.name.slice(0, 16)}
             </Button>
           </HStack>
         </ListItem>
