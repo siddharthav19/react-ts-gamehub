@@ -1,6 +1,7 @@
 import { Show } from "@chakra-ui/react";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { useState } from "react";
+import Footer from "./components/Footer";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import NavBar from "./components/NavBar";
@@ -13,8 +14,8 @@ function App() {
   return (
     <Grid
       templateAreas={{
-        base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`, //lg for devices whose screen is larger than 1024px
+        base: `"nav" "main" "footer"`,
+        lg: `"nav nav" "aside main" "footer footer"`, //lg for devices whose screen is larger than 1024px
       }}
       templateColumns={{
         base: "1fr",
@@ -35,6 +36,9 @@ function App() {
       <GridItem area={"main"}>
         <PlatformSelector />
         <GameGrid selectedGenre={selectedGenre} />
+      </GridItem>
+      <GridItem area={"footer"}>
+        <Footer />
       </GridItem>
     </Grid>
   );
