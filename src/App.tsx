@@ -13,6 +13,7 @@ import { Genre } from "./hooks/useGenres";
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
+  sortOrder: string;
 }
 
 function App() {
@@ -43,14 +44,19 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area={"main"}>
-        <HStack bg={"teal"} spacing={5} paddingLeft={2} marginBottom={5}>
+        <HStack spacing={5} paddingLeft={2} marginBottom={5}>
           <PlatformSelector
             selectedPlatform={gameQuery.platform}
             handlePlatformSelection={(platform) =>
               setGameQuery({ ...gameQuery, platform })
             }
           />
-          <SortSelector />
+          <SortSelector
+            sortOrder={gameQuery.sortOrder}
+            handleSortSelection={(sortOrder) =>
+              setGameQuery({ ...gameQuery, sortOrder })
+            }
+          />
         </HStack>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
