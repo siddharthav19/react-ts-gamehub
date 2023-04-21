@@ -1,4 +1,4 @@
-import { HStack, Show } from "@chakra-ui/react";
+import { Box, HStack, Show } from "@chakra-ui/react";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { useState } from "react";
 import Footer from "./components/Footer";
@@ -44,20 +44,24 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area={"main"}>
-        <HStack spacing={5} paddingLeft={2} marginBottom={5}>
-          <PlatformSelector
-            selectedPlatform={gameQuery.platform}
-            handlePlatformSelection={(platform) =>
-              setGameQuery({ ...gameQuery, platform })
-            }
-          />
-          <SortSelector
-            sortOrder={gameQuery.sortOrder}
-            handleSortSelection={(sortOrder) =>
-              setGameQuery({ ...gameQuery, sortOrder })
-            }
-          />
-        </HStack>
+        <Box paddingLeft={2} marginBottom={5}>
+          <Box margin={"2px"} display="inline-block">
+            <PlatformSelector
+              selectedPlatform={gameQuery.platform}
+              handlePlatformSelection={(platform) =>
+                setGameQuery({ ...gameQuery, platform })
+              }
+            />
+          </Box>
+          <Box margin={"2px"} display="inline-block">
+            <SortSelector
+              sortOrder={gameQuery.sortOrder}
+              handleSortSelection={(sortOrder) =>
+                setGameQuery({ ...gameQuery, sortOrder })
+              }
+            />
+          </Box>
+        </Box>
         <GameGrid gameQuery={gameQuery} />
       </GridItem>
       <GridItem area={"footer"}>
