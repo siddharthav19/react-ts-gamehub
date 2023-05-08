@@ -3,6 +3,7 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { useState } from "react";
 import Footer from "./components/Footer";
 import GameGrid from "./components/GameGrid";
+import GameHeading from "./components/gameHeading";
 import GenreList from "./components/GenreList";
 import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
@@ -49,6 +50,7 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area={"main"}>
+        <GameHeading gameQuery={gameQuery} />
         <Box paddingLeft={2} marginBottom={5}>
           <Box margin={"2px"} display="inline-block">
             <PlatformSelector
